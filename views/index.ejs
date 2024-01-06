@@ -47,7 +47,7 @@
                         <div class="hidden md:block">
                             <div class="relative">
                                 <img id="userInfoAvatar" class="h-24 w-24 rounded-full shadow-lg">
-                                <span id="status" class="bottom-0 right-0 absolute w-5 h-5 border-2 border-[#1f1f1f] rounded-full"></span>
+                                <span id="status" class="bottom-0 right-0 absolute w-5 h-5 border-4 border-[#1f1f1f] rounded-full"></span>
                             </div>
                         </div>
                         <div>
@@ -129,18 +129,20 @@
             } else if (data.presence === "Offline") {
                 $("#status").addClass("bg-gray-400");
             } else {
-                $("#status").addClass("bg-red-600");
+                $("#status").hide();
             }
-            $("#userInfoUsername").html(data.username);
-            $("#userInfoRealname").html(data.realName);
+            $("#userInfoUsername").html(data.username ? data.username : "Unknown User");
+            $("#userInfoRealname").html(data.realName ? data.realName : "Unknown User");
 
-            $("#userInfoGamerscore").html(Number(data.gamerscore).toLocaleString());
-            $("#userInfoStatusText").html(data.presenceText);
-            $("#userInfoYearsOnXb").html(`${data.yearsOnXbox} years on xbox`);
+            $("#userInfoGamerscore").html(Number(data.gamerscore ? data.gamerscore : 0).toLocaleString());
+            $("#userInfoStatusText").html(data.presenceText ? data.presenceText : "Offline");
+            $("#userInfoYearsOnXb").html(`${Number(data.yearsOnXbox ? data.yearsOnXbox : 0)} years on xbox`);
 
-            $("#userInfoFollowers").html(Number(data.followers).toLocaleString());
-            $("#userInfoFollowing").html(Number(data.following).toLocaleString());
+            $("#userInfoFollowers").html(Number(data.followers ? data.followers : 0).toLocaleString());
+            $("#userInfoFollowing").html(Number(data.following ? data.following : 0).toLocaleString());
+
             $("#userInfoBio").html(data.bio ? data.bio : "No bio set.");
+
             $("#userInfoFriends").html(data.friends);
 
             data.recentGames.forEach((game) => {
