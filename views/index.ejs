@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xbox Username Lookup</title>
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="bg-[#0f0f0f]" style="font-family: 'Poppins', sans-serif !important;">
+    <!-- idk -->
+    <div class="flex h-screen">
+        <div class="m-auto md:w-full">
+            <!-- page loader -->
+            <div id="loader" class="md:w-1/2 md:mx-auto hidden px-4">
+                <svg class="w-10 h-10 text-[#1f1f1f] fill-[#2f2f2f] mx-auto animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                </svg>
+            </div>
+
+            <!-- username input screen -->
+            <div id="usernameInput" class="md:w-1/2 md:mx-auto px-4">
+                <div class="bg-[#1f1f1f] border border-[#2f2f2f] px-4 py-4 rounded shadow-lg">
+                    <p class="text-white text-2xl font-medium">Xbox Username Lookup</p>
+                    <p class="text-gray-400">Allows you to get information from a xbox username</p>
+                    <form onsubmit="submitForm(event)" class="flex flex-col gap-4 mt-4">
+                        <div class="flex flex-col">
+                            <label for="username" class="text-gray-400 text-sm uppercase">
+                                Username
+                            </label>
+                            <input autocomplete="off" required="true" type="text" name="username" id="username" placeholder="Ex: FNCHEAP" class="px-4 py-2 rounded shadow-lg bg-[#2f2f2f] border border-[#3f3f3f] placeholder-gray-400 text-white outline-none">
+                        </div>
+                        <button type="submit" class="px-4 py-2 rounded shadow-lg text-white bg-[#2f2f2f] border border-[#3f3f3f]">
+                            Submit
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- user information -->
+            <div id="userInfo" class="md:w-1/2 md:mx-auto hidden px-4">
+                <div class="bg-[#1f1f1f] border border-[#2f2f2f] px-4 py-4 rounded shadow-lg">
+                    <div class="flex items-center gap-4">
+                        <div class="hidden md:block">
+                            <div class="relative">
+                                <img id="userInfoAvatar" class="h-24 w-24 rounded-full shadow-lg">
+                                <span id="status" class="bottom-0 right-0 absolute w-5 h-5 border-2 border-[#1f1f1f] rounded-full"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-white text-2xl font-medium" id="userInfoUsername"></p>
+                            <p class="text-gray-400" id="userInfoRealname"></p>
+                            <div class="md:flex items-center gap-2">
+                                <div class="flex items-center gap-1">
+                                    <div>
+                                        <svg class="text-gray-400 h-6 w-6">
+                                            <g xmlns="http://www.w3.org/2000/svg" fill="currentColor" fill-rule="evenodd">
+                                                <path fill-rule="nonzero" d="M15.96 15.658c-.36.433-.872.77-1.534 1.008-.66.24-1.393.359-2.198.359-.844 0-1.584-.184-2.221-.553-.637-.369-1.128-.903-1.474-1.605-.346-.701-.524-1.525-.533-2.473v-.663c0-.974.164-1.817.493-2.53.328-.712.801-1.257 1.42-1.635C10.532 7.19 11.257 7 12.088 7c1.157 0 2.061.276 2.714.828.652.551 1.038 1.354 1.159 2.409h-1.957c-.09-.559-.287-.968-.593-1.227-.306-.259-.727-.388-1.263-.388-.684 0-1.204.257-1.561.77-.358.514-.539 1.278-.543 2.292v.623c0 1.023.194 1.796.583 2.319.389.523.958.784 1.709.784.755 0 1.293-.16 1.615-.483v-1.682h-1.83v-1.48h3.84v3.893z"/>
+                                                <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2m0 21C5.935 23 1 18.065 1 12S5.935 1 12 1s11 4.935 11 11-4.935 11-11 11"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-400" id="userInfoGamerscore"></p>
+                                    </div>
+                                </div>
+                                <div class="hidden md:block">
+                                    <p class="text-gray-400">&bull;</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400" id="userInfoStatusText"></p>
+                                </div>
+                                <div class="hidden md:block">
+                                    <p class="text-gray-400">&bull;</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400" id="userInfoYearsOnXb"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-[#1f1f1f] border border-[#2f2f2f] px-4 py-4 rounded shadow-lg mt-4">
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div>
+                            <p class="text-gray-400">Followers</p>
+                            <p id="userInfoFollowers" class="text-white text-2xl font-medium"></p>
+                        </div>
+                        <div>
+                            <p class="text-gray-400">Following</p>
+                            <p id="userInfoFollowing" class="text-white text-2xl font-medium"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-[#1f1f1f] border border-[#2f2f2f] px-4 py-4 rounded shadow-lg mt-4">
+                    <p class="text-white text-2xl font-medium">About</p>
+                    <code id="userInfoBio" class="text-gray-400"></code>
+                </div>
+                <div class="bg-[#1f1f1f] border border-[#2f2f2f] px-4 py-4 rounded shadow-lg mt-4">
+                    <p class="text-white text-2xl font-medium">Friends</p>
+                    <code id="userInfoFriends" class="text-gray-400"></code>
+                </div>
+                <div class="bg-[#1f1f1f] border border-[#2f2f2f] px-4 py-4 rounded shadow-lg mt-4">
+                    <p class="text-white text-2xl font-medium">Recent Games</p>
+                    <code id="userInfoRecentGames" class="text-gray-400"></code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- spinning pepe :D -->
+    <div class="fixed bottom-0 right-0 z-[999]">
+        <img src="https://cdn3.emoji.gg/emojis/6304-pepe-sipspin.gif" draggable="false">
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+    async function fetchXboxData(username) {
+        try {
+            const response = await fetch(`/api/v1/xbox?username=${encodeURIComponent(username)}`);
+            const data = await response.json();
+
+            $("#userInfoAvatar").attr("src", data.avatar);
+            if (data.presence === "Online") {
+                $("#status").addClass("bg-green-400");
+            } else if (data.presence === "Offline") {
+                $("#status").addClass("bg-gray-400");
+            } else {
+                $("#status").addClass("bg-red-600");
+            }
+            $("#userInfoUsername").html(data.username);
+            $("#userInfoRealname").html(data.realName);
+
+            $("#userInfoGamerscore").html(Number(data.gamerscore).toLocaleString());
+            $("#userInfoStatusText").html(data.presenceText);
+            $("#userInfoYearsOnXb").html(`${data.yearsOnXbox} years on xbox`);
+
+            $("#userInfoFollowers").html(Number(data.followers).toLocaleString());
+            $("#userInfoFollowing").html(Number(data.following).toLocaleString());
+            $("#userInfoBio").html(data.bio ? data.bio : "No bio set.");
+            $("#userInfoFriends").html(data.friends);
+
+            data.recentGames.forEach((game) => {
+                $("#userInfoRecentGames").append(`${game}<br/>`);
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    function submitForm(event) {
+        event.preventDefault();
+        const username = $("#username").val();
+
+        $("#loader").show();
+        $("#usernameInput").hide();
+        
+        const startTime = performance.now();
+        fetchXboxData(username).then(() => {
+            const endTime = performance.now();
+            const requestDuration = endTime - startTime;
+            const timeoutDuration = Math.max(0, 5050 - requestDuration);
+
+            setTimeout(() => {
+                $("#loader").hide();
+                $("#userInfo").show();
+            }, timeoutDuration);
+        });
+    }
+</script>
+</html>
